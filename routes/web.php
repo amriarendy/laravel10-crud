@@ -18,4 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/posts', PostController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('role:admin')->resource('/posts', PostController::class);
+//Route::middleware('role:admin')->get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts');
